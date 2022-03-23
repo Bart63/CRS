@@ -1,4 +1,4 @@
-package article;
+package Model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +14,7 @@ public class Article {
     private String people;
     private String orgs;
     private String exchanges;
+    private FeaturesVector featuresVector;
 
     public Article(String title, String body, String date, String dateline, String places, String topics, String people, String orgs, String exchanges) {
         this.title = split(title);
@@ -25,6 +26,8 @@ public class Article {
         this.people = people;
         this.orgs = orgs;
         this.exchanges = exchanges;
+
+        featuresVector = new FeaturesVector();
     }
 
     public List<String> getTitle() {

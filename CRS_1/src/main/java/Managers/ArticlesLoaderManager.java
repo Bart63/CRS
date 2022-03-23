@@ -1,31 +1,41 @@
-package article;
+package Managers;
 
 // https://jsoup.org/
+import Model.Article;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import process.ProcessWords;
+import Process.ProcessWords;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Parser {
-    private static final String ARTICLES_PATH = "C:\\Users\\barte\\Documents\\INF_STOS\\SEM6_Proj\\KSR\\laby\\zad1\\CRS\\CRS_1\\src\\main\\resources\\reuters";
+public class ArticlesLoaderManager {
+    private static final String ARTICLES_PATH = "reuters";
     private static final String CHARSET_UTF_8 = "UTF-8";
     private List<Document> reutersDocs;
     private List<Article> articles;
 
-    public Parser() throws IOException {
+    public ArticlesLoaderManager() throws IOException, URISyntaxException {
         loadFiles();
         loadArticles();
+        processArticles();
     }
 
-    public void loadFiles() throws IOException {
-        File directory = new File(ARTICLES_PATH);
+    public void loadFiles() throws URISyntaxException, IOException {
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource(ARTICLES_PATH);
+
+        File directory = new File(resource.toURI());
+
         File[] documents = directory.listFiles();
         reutersDocs = new LinkedList<>();
         for (File doc : documents) {
@@ -57,7 +67,7 @@ public class Parser {
                     continue;
                 }
 
-                Article a = new Article(title, body, date, dateline, places, topics, people, orgs, exchanges);
+                Article a = new Article(title, text, date, dateline, places, topics, people, orgs, exchanges);
                 articles.add(a);
             }
         }
@@ -68,9 +78,9 @@ public class Parser {
     }
 
     // stemization and remove stopwords
-    public List<Article> processArticles () throws FileNotFoundException {
+    public void processArticles () throws FileNotFoundException, URISyntaxException {
         ProcessWords pw = new ProcessWords();
-        List<Article> processedArticles = new ArrayList<Article>();
+
         for (Article a : getArticles()) {
             List<String> removedStopWordsTitle = pw.removeStopWordsFromText(a.getTitle());
             List<String> stemmedTitle = pw.stemWords(removedStopWordsTitle);
@@ -80,8 +90,7 @@ public class Parser {
             List<String> stemmedBody = pw.stemWords(removedStopWordsBody);
             a.setBody(stemmedBody);
 
-            processedArticles.add(a);
         }
-        return processedArticles;
+
     }
 }

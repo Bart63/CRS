@@ -1,9 +1,11 @@
-package process;
+package Process;
 
 import org.tartarus.snowball.ext.EnglishStemmer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,11 +13,16 @@ import java.util.Scanner;
 
 public class ProcessWords {
     // From https://gist.github.com/larsyencken/1440509
-    private final String stopWordsPath = "C:\\Users\\barte\\Documents\\INF_STOS\\SEM6_Proj\\KSR\\laby\\zad1\\CRS\\CRS_1\\src\\main\\resources\\stopwords.txt";
+    private final String stopWordsPath = "stopwords.txt";
 
-    public List<String> removeStopWordsFromText (List<String> toClean) throws FileNotFoundException {
+    public List<String> removeStopWordsFromText (List<String> toClean) throws FileNotFoundException, URISyntaxException {
         List<String> words = new LinkedList<>();
-        File file = new File(stopWordsPath);
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource(stopWordsPath);
+
+        File file = new File(resource.toURI());
+
         Scanner s = new Scanner(file);
         while (s.hasNext()) {
             words.add(s.next());
