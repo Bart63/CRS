@@ -16,6 +16,10 @@ public class Article {
     private String exchanges;
     private FeaturesVector featuresVector;
 
+    private Countries actualCountry;
+    private Countries predicatedCountry;
+
+
     public Article(String title, String body, String date, String dateline, String places, String topics, String people, String orgs, String exchanges) {
         this.title = split(title);
         this.body = split(body);
@@ -28,7 +32,39 @@ public class Article {
         this.exchanges = exchanges;
 
         featuresVector = new FeaturesVector();
+
+        switch (this.places){
+            case "west-germany":
+                actualCountry = Countries.west_germany;
+                break;
+
+            case "usa":
+                actualCountry = Countries.usa;
+                break;
+
+            case "france":
+                actualCountry = Countries.france;
+                break;
+
+            case "uk":
+                actualCountry = Countries.uk;
+                break;
+
+            case "canada":
+                actualCountry = Countries.canada;
+                break;
+
+            case "japan":
+                actualCountry = Countries.japan;
+                break;
+        }
     }
+
+    public Countries getPredicatedCountry() { return predicatedCountry; }
+
+    public void setPredicatedCountry(Countries predicatedCountry) { this.predicatedCountry = predicatedCountry; }
+
+    public Countries getActualCountry() { return actualCountry; }
 
     public List<String> getTitle() {
         return title;
@@ -102,7 +138,7 @@ public class Article {
         this.exchanges = exchanges;
     }
 
-    public List<String> split(String text) {
+    private List<String> split(String text) {
         List<String> wordList = new ArrayList<String>(Arrays.asList(text.replaceAll("[^a-zA-Z ']", "").split(" ")));
         wordList.removeAll(Arrays.asList("", null));
         return wordList;

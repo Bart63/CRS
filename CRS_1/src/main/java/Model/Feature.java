@@ -12,8 +12,20 @@ public class Feature<T> {
         this.country = country;
     }
 
+    public Feature(FeatureType featureType) {
+        this.featureType = featureType;
+    }
+
+    public void setCountry(Countries country) {
+        this.country = country;
+    }
+
     public T getValue() {
         return value;
+    }
+
+    public void setValue(T value) {
+        this.value = value;
     }
 
     public FeatureType getFeatureType() {
