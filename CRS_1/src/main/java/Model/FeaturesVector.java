@@ -5,7 +5,15 @@ import java.util.Arrays;
 public class FeaturesVector {
 
     private Feature[] features;
+    private Countries country;
 
+    public Countries getCountry() {
+        return country;
+    }
+
+    public void setCountry(Countries country) {
+        this.country = country;
+    }
 
     public FeaturesVector() {
 
