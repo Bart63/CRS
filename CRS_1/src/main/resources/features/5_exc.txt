@@ -1,5 +1,3 @@
-Firma(?) otrzymywana z konkatenacji zawartości tagów EXCHANGES, TITLE, BODY
-Wartości:
 amex
 ase
 asx

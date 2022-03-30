@@ -61,8 +61,6 @@ public class KeywordsLoaderManager {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line;
-            br.readLine();
-            br.readLine();
 
             List<String> keywords = new ArrayList<>();
 
