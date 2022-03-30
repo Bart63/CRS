@@ -17,6 +17,10 @@ public class KeywordsRepo {
         return (index > 0 && index < keywordsGroups.size()) ? keywordsGroups.get(index) : null;
     }
 
+    public List<KeywordsGroup> getKeywordsGroups() {
+        return keywordsGroups;
+    }
+
     public KeywordsGroup[] getKeywordsGroup(FeatureType featureType){
         return (KeywordsGroup[]) keywordsGroups.stream().filter(x -> x.getKeywordsType().equals(featureType)).toArray();
     }

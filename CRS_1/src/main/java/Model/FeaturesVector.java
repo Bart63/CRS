@@ -6,6 +6,7 @@ public class FeaturesVector {
 
     private Feature[] features;
     private Countries country;
+    private Countries predicatedCountry;
 
     public Countries getCountry() {
         return country;
@@ -46,7 +47,21 @@ public class FeaturesVector {
         return Arrays.stream(features).filter(x -> x.getFeatureType().equals(featureType)).findAny().orElse(null);
     }
 
-    public void setFeature(int index, Feature feature) {
-        features[index] = feature;
+    public Countries getPredicatedCountry() {
+        return predicatedCountry;
+    }
+
+    public void setPredicatedCountry(Countries predicatedCountry) {
+        this.predicatedCountry = predicatedCountry;
+    }
+
+    @Override
+    public String toString() {
+        return new org.apache.commons.lang3.builder.ToStringBuilder(this)
+                .append("features", features)
+                .append("\n")
+                .append("country", country)
+                .append("predicatedCountry", predicatedCountry)
+                .toString();
     }
 }

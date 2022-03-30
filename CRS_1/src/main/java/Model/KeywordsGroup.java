@@ -5,21 +5,21 @@ import java.util.List;
 public class KeywordsGroup {
 
     private List<String> keywords;
-    private Countries country;
     private FeatureType keywordsType;
+    private boolean isEnabled;
 
-    public KeywordsGroup(List<String> keywords, Countries country, FeatureType keywordsType) {
+    public KeywordsGroup(boolean isEnabled, FeatureType keywordsType, List<String> keywords) {
         this.keywords = keywords;
-        this.country = country;
         this.keywordsType = keywordsType;
+        this.isEnabled = isEnabled;
     }
 
     public List<String> getKeywords() {
         return keywords;
     }
 
-    public Countries getCountry() {
-        return country;
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
     public FeatureType getKeywordsType() {

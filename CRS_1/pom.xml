@@ -23,11 +23,83 @@
             <artifactId>CRSProject</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.11</version>
+        </dependency>
     </dependencies>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>Main</mainClass>
+                    <arguments>
+                        <!-- współczynnik k -->
+                        <argument>5</argument>
+                        <!-- stosunek zbioru treningowego do testowego -->
+                        <argument>0.5</argument>
+                        <!-- miara 1 - euklides || 2 - uliczna || 3 czebyszewa -->
+                        <argument>1</argument>
+
+                        <!-- uwzględnianie kolejnych cech 0 -> false || 1 -> true -->
+
+                        <!-- day -->
+                        <argument>1</argument>
+
+                        <!-- mth -->
+                        <argument>1</argument>
+
+                        <!-- cit -->
+                        <argument>1</argument>
+
+                        <!-- top -->
+                        <argument>1</argument>
+
+                        <!-- exc -->
+                        <argument>1</argument>
+
+                        <!-- per -->
+                        <argument>1</argument>
+
+                        <!-- cur -->
+                        <argument>1</argument>
+
+                        <!-- com -->
+                        <argument>1</argument>
+
+                        <!-- con -->
+                        <argument>1</argument>
+
+                        <!-- ene -->
+                        <argument>1</argument>
+
+                        <!-- imp -->
+                        <argument>1</argument>
+
+                        <!-- met -->
+                        <argument>1</argument>
+                    </arguments>
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

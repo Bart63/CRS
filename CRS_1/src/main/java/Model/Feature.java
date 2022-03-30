@@ -1,5 +1,7 @@
 package Model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class Feature<T> {
 
     private T value;
@@ -14,9 +16,12 @@ public class Feature<T> {
 
     public Feature(FeatureType featureType) {
         this.featureType = featureType;
+
     }
 
-
+    public void setFeatureType(FeatureType featureType) {
+        this.featureType = featureType;
+    }
 
     public T getValue() {
         return value;
@@ -30,5 +35,12 @@ public class Feature<T> {
         return featureType;
     }
 
-
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("\n")
+                .append("value", value)
+                .append("featureType", featureType)
+                .toString();
+    }
 }

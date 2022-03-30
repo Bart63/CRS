@@ -1,9 +1,9 @@
 Nazwa towaru otrzymywana z konkatenacji zawartości tagów TITLE, BODY
 Wartości:
-North America
-South America
-Africa
-Europe
-Asia
-Australia
-Antarctica
+north america
+south america
+africa
+europe
+asia
+australia
+antarctica

@@ -74,15 +74,21 @@ public class ArticlesLoaderManager {
         }
     }
 
-    public List<Article> getArticles() {
-        return articles;
+    public List<Article> getArticles(double p, boolean testing) {
+
+        if (testing) {
+            return articles.subList(0, (int)(articles.size() * p));
+        }
+        else {
+            return articles.subList((int)(articles.size() * p), articles.size());
+        }
     }
 
     // stemization and remove stopwords
     public void processArticles () throws FileNotFoundException, URISyntaxException {
         ProcessWords pw = new ProcessWords();
 
-        for (Article a : getArticles()) {
+        for (Article a : articles) {
             List<String> removedStopWordsTitle = pw.removeStopWordsFromText(a.getTitle());
             List<String> stemmedTitle = pw.stemWords(removedStopWordsTitle);
             a.setTitle(stemmedTitle);

@@ -1,5 +1,7 @@
 package Model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +19,7 @@ public class Article {
     private FeaturesVector featuresVector;
 
     private Countries actualCountry;
-    private Countries predicatedCountry;
+
 
 
     public Article(String title, String body, String date, String dateline, String places, String topics, String people, String orgs, String exchanges) {
@@ -58,11 +60,15 @@ public class Article {
                 actualCountry = Countries.japan;
                 break;
         }
+
+        featuresVector.setCountry(actualCountry);
     }
 
-    public Countries getPredicatedCountry() { return predicatedCountry; }
 
-    public void setPredicatedCountry(Countries predicatedCountry) { this.predicatedCountry = predicatedCountry; }
+    public FeaturesVector getFeaturesVector() {
+        return featuresVector;
+    }
+
 
     public Countries getActualCountry() { return actualCountry; }
 
@@ -82,19 +88,19 @@ public class Article {
         this.body = body;
     }
 
-    private String getDate() {
+    public String getDate() {
         return date;
     }
 
-    private void setDate() {
+    public void setDate() {
         this.date = date;
     }
 
-    private String getDateline() {
+    public String getDateline() {
         return dateline;
     }
 
-    private void setDateline() {
+    public void setDateline() {
         this.dateline = dateline;
     }
 
@@ -142,5 +148,22 @@ public class Article {
         List<String> wordList = new ArrayList<String>(Arrays.asList(text.replaceAll("[^a-zA-Z ']", "").split(" ")));
         wordList.removeAll(Arrays.asList("", null));
         return wordList;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("title", title)
+                .append("body", body)
+                .append("date", date)
+                .append("dateline", dateline)
+                .append("places", places)
+                .append("topics", topics)
+                .append("people", people)
+                .append("orgs", orgs)
+                .append("exchanges", exchanges)
+                .append("featuresVector", featuresVector)
+                .append("actualCountry", actualCountry)
+                .toString();
     }
 }
