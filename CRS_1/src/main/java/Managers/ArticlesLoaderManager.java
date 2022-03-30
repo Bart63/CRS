@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class ArticlesLoaderManager {
     private static final String ARTICLES_PATH = "reuters";
@@ -48,13 +49,13 @@ public class ArticlesLoaderManager {
         for (Document doc : reutersDocs) {
             for (Element el : doc.select("reuters")) {
                 String date = el.select("date").text();
-                String topics = el.select("topics").select("d").text();
-                String places = el.select("places").select("d").text();
-                String people = el.select("people").select("d").text();
-                String orgs = el.select("orgs").select("d").text();
-                String exchanges = el.select("exchanges").select("d").text();
-                String title = el.select("title").text();
-                String text = el.select("text").text();
+                String topics = el.select("topics").select("d").text().toLowerCase(Locale.ROOT);
+                String places = el.select("places").select("d").text().toLowerCase(Locale.ROOT);
+                String people = el.select("people").select("d").text().toLowerCase(Locale.ROOT);
+                String orgs = el.select("orgs").select("d").text().toLowerCase(Locale.ROOT);
+                String exchanges = el.select("exchanges").select("d").text().toLowerCase(Locale.ROOT);
+                String title = el.select("title").text().toLowerCase(Locale.ROOT);
+                String text = el.select("text").text().toLowerCase(Locale.ROOT);
                 String dateline = el.select("dateline").text();
                 String body = el.select("body").text();
 
