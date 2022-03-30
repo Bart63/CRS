@@ -1,0 +1,12 @@
+Nazwa surowca energetycznego otrzymywana z konkatenacji zawartości tagów TITLE, BODY
+Wartości:
+crude
+heat
+gas
+fuel
+gasoline
+petro-chem
+propane
+jet
+kerosene
+naphtha

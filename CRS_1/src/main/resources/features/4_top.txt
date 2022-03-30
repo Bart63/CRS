@@ -1,3 +1,5 @@
+Nazwa tematów otrzymywana z konkatenacji zawartości tagów TOPICS, TITLE, BODY
+Wartości:
 acq
 alum
 austdlr

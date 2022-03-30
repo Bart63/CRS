@@ -1,0 +1,1 @@
+Wartość całkowita od 1 do 31 z tagu DATE

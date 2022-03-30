@@ -1,0 +1,45 @@
+Nazwa jednostki imperialnej otrzymywana z konkatenacji zawartości tagów TITLE, BODY
+Wartości:
+twip
+thou
+barleycorn
+inch
+hand
+foot
+yard
+furlong
+mile
+fathom
+rod
+square mile
+perch
+rood
+acre
+ounce
+gill
+pint
+quart
+gallon
+grain
+drachim
+pound
+stone
+ton
+slug
+th
+Bc
+h
+ft
+yd
+ch
+fur
+mi
+ftm
+lea
+nmi
+sq mi
+gi
+pt
+qt
+gal
+oz

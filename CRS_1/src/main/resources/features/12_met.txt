@@ -1,0 +1,24 @@
+Nazwa jednostki imperialnej otrzymywana z konkatenacji zawartości tagów TITLE, BODY
+Wartości:
+metre
+centimetre
+miligram
+kilometre
+kilogram
+gram
+tonne
+dalton
+square metre
+cubic metre
+hectare
+litre
+mg
+l
+ha
+kg
+g
+t
+m
+cm
+km
+da

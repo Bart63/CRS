@@ -1,3 +1,5 @@
+Nazwisko otrzymywane z konkatenacji zawartości tagów PEOPLE, TITLE, BODY
+Wartości:
 abdel-hadi-kandeel
 alfonsin
 alhaji-abdul-ahmed
