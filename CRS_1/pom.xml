@@ -54,9 +54,9 @@
                         <!-- współczynnik k -->
                         <argument>5</argument>
                         <!-- stosunek zbioru treningowego do testowego -->
-                        <argument>0.5</argument>
+                        <argument>0.7</argument>
                         <!-- miara 1 - euklides || 2 - uliczna || 3 czebyszewa -->
-                        <argument>1</argument>
+                        <argument>3</argument>
 
                         <!-- uwzględnianie kolejnych cech 0 -> false || 1 -> true -->
 

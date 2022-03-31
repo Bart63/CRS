@@ -64,4 +64,9 @@ public class FeaturesVector {
                 .append("predicatedCountry", predicatedCountry)
                 .toString();
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

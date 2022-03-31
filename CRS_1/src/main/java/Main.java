@@ -1,6 +1,7 @@
 import Managers.KeywordsLoaderManager;
 import Model.Article;
 import Managers.ArticlesLoaderManager;
+import Model.Countries;
 import Model.FeatureType;
 import Repos.ArticlesRepo;
 import Repos.KeywordsRepo;
@@ -49,10 +50,12 @@ public class Main {
         GenerateVectors generateLearningVectors = new GenerateVectors(learningArticlesRepo, learningKeywordsRepo);
         GenerateVectors generateTestingVectors = new GenerateVectors(testingArticlesRepo, learningKeywordsRepo);
 
-        for(int i = 0; i< learningArticlesRepo.getArticles().size(); i++)
+        ClassifyArticles classifyArticles = new ClassifyArticles(learningArticlesRepo, testingArticlesRepo, m, k);
+
+        for(int i = 0; i< testingArticlesRepo.getArticles().size(); i++)
         {
-            if (!learningArticlesRepo.getArticle(i).getFeaturesVector().getFeature(FeatureType.con).getValue().toString().isEmpty()) {
-                System.out.println(learningArticlesRepo.getArticle(i).getFeaturesVector().toString());
+            if (testingArticlesRepo.getArticle(i).getFeaturesVector().getPredicatedCountry() != Countries.usa) {
+                System.out.println(testingArticlesRepo.getArticle(i).getFeaturesVector().toString());
                 System.out.println("\n");
             }
         }

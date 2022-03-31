@@ -27,4 +27,15 @@ public class ArticlesRepo {
     public void addArticle(Article article){
         articles.add(article);
     }
+
+    public Article getArticleByVectorHashCode (int featuresVectorHashCode) {
+
+        for (Article a: articles
+             ) {
+            if (a.getFeaturesVector().hashCode() == featuresVectorHashCode)
+                return a;
+        }
+
+        return null;
+    }
 }

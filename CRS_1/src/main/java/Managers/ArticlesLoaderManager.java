@@ -39,9 +39,14 @@ public class ArticlesLoaderManager {
 
         File[] documents = directory.listFiles();
         reutersDocs = new LinkedList<>();
+
+
         for (File doc : documents) {
             reutersDocs.add(Jsoup.parse(doc, CHARSET_UTF_8, ""));
         }
+
+        //reutersDocs.add(Jsoup.parse(documents[0], CHARSET_UTF_8, ""));
+
     }
 
     public void loadArticles() {
