@@ -164,7 +164,7 @@ public class CalculateClassificationQuality {
 
             s += "|| " + Countries.values()[i].name() + " ||\n";
             s += "Precision: " + precision[i] + "\n";
-            s += "Recall :" + recall[i] + "\n";
+            s += "Recall: " + recall[i] + "\n";
             s += "-----------------------------------------" + "\n";
         }
 
