@@ -61,10 +61,10 @@
                         <!-- uwzględnianie kolejnych cech 0 -> false || 1 -> true -->
 
                         <!-- day -->
-                        <argument>1</argument>
+                        <argument>0</argument>
 
                         <!-- mth -->
-                        <argument>1</argument>
+                        <argument>0</argument>
 
                         <!-- cit -->
                         <argument>1</argument>
@@ -76,22 +76,22 @@
                         <argument>1</argument>
 
                         <!-- per -->
-                        <argument>1</argument>
+                        <argument>0</argument>
 
                         <!-- cur -->
-                        <argument>1</argument>
+                        <argument>0</argument>
 
                         <!-- com -->
                         <argument>1</argument>
 
                         <!-- con -->
-                        <argument>1</argument>
+                        <argument>0</argument>
 
                         <!-- ene -->
-                        <argument>1</argument>
+                        <argument>0</argument>
 
                         <!-- imp -->
-                        <argument>1</argument>
+                        <argument>0</argument>
 
                         <!-- met -->
                         <argument>1</argument>

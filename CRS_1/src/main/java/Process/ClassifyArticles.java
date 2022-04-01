@@ -16,16 +16,16 @@ public class ClassifyArticles {
 
     private Map<Integer, Double> distances;
 
-    public ClassifyArticles(ArticlesRepo trainingArticles, ArticlesRepo testingArticles, int metricsIndex, int k) {
+    public ClassifyArticles(ArticlesRepo trainingArticles, ArticlesRepo testingArticles, int metricsIndex, int k, boolean[] enableFeatures) {
         this.trainingArticles = trainingArticles;
         this.testingArticles = testingArticles;
 
         this.distances = new HashMap<>();
 
-        classify(metricsIndex, k);
+        classify(metricsIndex, k, enableFeatures);
     }
 
-    private void classify(int metrics, int k) {
+    private void classify(int metrics, int k, boolean[] enableFeatures) {
 
         for (Article aTesting: testingArticles.getArticles()
              ) {
@@ -46,17 +46,27 @@ public class ClassifyArticles {
 
                         case day, mth, imp, met -> {
 
-                            distances[i] = (int)testingVector.getFeature(type).getValue() - (int)trainingVector.getFeature(type).getValue();
+                            if (!enableFeatures[Arrays.stream(FeatureType.values()).toList().indexOf(type)])
+                                distances[i] = 0.0;
+
+                            else
+                                distances[i] = (int)testingVector.getFeature(type).getValue() - (int)trainingVector.getFeature(type).getValue();
                         }
                         case cit, top, exc, per, cur, com, con, ene -> {
 
-                            distances[i] = calculateNGram(
+                            if (!enableFeatures[Arrays.stream(FeatureType.values()).toList().indexOf(type)])
+                                distances[i] = 0.0;
+
+                            else
+                                distances[i] = calculateTriGram(
                                     (String) testingVector.getFeature(type).getValue(), (String) trainingVector.getFeature(type).getValue());
                         }
                     }
 
                     i++;
                 }
+
+
 
                 double d = calculateDistance(metrics, distances);
 
@@ -68,9 +78,9 @@ public class ClassifyArticles {
             Stream<Map.Entry<Integer, Double>> sorted = this.distances.entrySet().stream().sorted(
                     (Map.Entry<Integer, Double> x1, Map.Entry<Integer, Double> x2) -> {
                 if (x1.getValue() > x2.getValue())
-                    return -1;
-                if (x1.getValue() < x2.getValue())
                     return 1;
+                if (x1.getValue() < x2.getValue())
+                    return -1;
                 else
                     return 0;
             });
@@ -123,7 +133,7 @@ public class ClassifyArticles {
 
                         int index = c.indexOf(a.getActualCountry());
 
-                        averages[index] += numberOfCountries[index];
+                        averages[index] += (kVectors.stream().filter(x -> x.getKey() == a.getFeaturesVector().hashCode())).toList().get(0).getValue();
                     }
 
                 }
@@ -140,7 +150,7 @@ public class ClassifyArticles {
 
                 Double minAverage = Arrays.stream(averages).min(Double::compare).orElse(0.0);
 
-                if (Arrays.stream(averages).filter(x -> x == minAverage).toList().size() == 1)
+                if (Collections.frequency(List.of(averages), minAverage) == 1)
                 {
                     aTesting.getFeaturesVector().setPredicatedCountry(c.get(Arrays.stream(averages).toList().indexOf(minAverage)));
                 }
@@ -195,10 +205,10 @@ public class ClassifyArticles {
         }
     }
 
-    private double calculateNGram (String t1, String t2){
+    private double calculateTriGram(String t1, String t2){
 
         if (t1.isEmpty() || t2.isEmpty())
-            return 0;
+            return 1;
 
         double d = 0;
 
@@ -217,6 +227,6 @@ public class ClassifyArticles {
 
         }
 
-        return d / (s1.length() - 2);
+        return 1 - (d / (s1.length() - 2));
     }
 }

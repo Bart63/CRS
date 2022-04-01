@@ -144,6 +144,8 @@ public class Article {
         this.exchanges = exchanges;
     }
 
+
+
     private List<String> split(String text) {
         List<String> wordList = new ArrayList<String>(Arrays.asList(text.replaceAll("[^a-zA-Z ']", "").split(" ")));
         wordList.removeAll(Arrays.asList("", null));

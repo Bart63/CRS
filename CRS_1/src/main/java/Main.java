@@ -9,30 +9,40 @@ import Process.*;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, URISyntaxException {
 
-        /*
-        ArticlesLoaderManager parser = new ArticlesLoaderManager();
-        ArticlesRepo articlesRepo = new ArticlesRepo(parser.getArticles());
-        System.out.println(articlesRepo.getArticles().size());
-        for (Article article: articlesRepo.getArticles()) {
-            System.out.println(article.getBody());
-           System.out.println();
-       }
 
-         */
-
-        int k = Integer.parseInt(args[0]);
-        double p = Double.parseDouble(args[1]);
-        int m = Integer.parseInt(args[2]);
+        int k = 5;
+        double p = 0.7;
+        int m = 1;
 
         boolean[] f = new boolean[12];
+        Arrays.fill(f, true);
 
-        for (int i = 0; i < 12; i++){
-            f[i] = (Integer.parseInt(args[i + 3])) == 1;
+
+        System.out.println("Parameters (k--p--m--features)");
+        Scanner sc = new Scanner(System.in);
+        String buf = sc.nextLine();
+
+        if (!buf.isEmpty()){
+
+            List<String> strings = Arrays.stream(buf.split("--")).toList();
+
+            k = Integer.parseInt(strings.get(0));
+            p = Double.parseDouble(strings.get(1));
+            m = Integer.parseInt(strings.get(2));
+
+            int i = 0;
+            for (char s:strings.get(3).toCharArray()
+                 ) {
+                f[i] = (s == '1');
+                i++;
+            }
         }
 
         ArticlesLoaderManager parser = new ArticlesLoaderManager();
@@ -47,18 +57,23 @@ public class Main {
         //System.out.println(learningArticlesRepo.getArticle(0).getDate());
         //System.out.println(learningArticlesRepo.getArticle(0).getDateline());
 
-        GenerateVectors generateLearningVectors = new GenerateVectors(learningArticlesRepo, learningKeywordsRepo);
-        GenerateVectors generateTestingVectors = new GenerateVectors(testingArticlesRepo, learningKeywordsRepo);
+        GenerateVectors generateLearningVectors = new GenerateVectors(learningArticlesRepo, learningKeywordsRepo, f);
+        GenerateVectors generateTestingVectors = new GenerateVectors(testingArticlesRepo, learningKeywordsRepo, f);
 
-        ClassifyArticles classifyArticles = new ClassifyArticles(learningArticlesRepo, testingArticlesRepo, m, k);
+        ClassifyArticles classifyArticles = new ClassifyArticles(learningArticlesRepo, testingArticlesRepo, m, k, f);
+
+        CalculateClassificationQuality quality = new CalculateClassificationQuality(testingArticlesRepo);
 
         for(int i = 0; i< testingArticlesRepo.getArticles().size(); i++)
         {
-            if (testingArticlesRepo.getArticle(i).getFeaturesVector().getPredicatedCountry() != Countries.usa) {
-                System.out.println(testingArticlesRepo.getArticle(i).getFeaturesVector().toString());
-                System.out.println("\n");
-            }
+
+            System.out.println(testingArticlesRepo.getArticle(i).getFeaturesVector().toString());
+            System.out.println("\n");
+
         }
 
+        System.out.print(quality);
+
+        System.out.print(testingArticlesRepo);
     }
 }

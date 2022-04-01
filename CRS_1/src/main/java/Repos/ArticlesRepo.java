@@ -1,7 +1,11 @@
 package Repos;
 
 import Model.Article;
+import Model.Countries;
+import Model.FeaturesVector;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArticlesRepo {
@@ -37,5 +41,34 @@ public class ArticlesRepo {
         }
 
         return null;
+    }
+
+    public List<FeaturesVector> getVectors(){
+
+        List<FeaturesVector> vectors = new ArrayList<>();
+
+        for (Article a:articles
+        ) {
+
+            vectors.add(a.getFeaturesVector());
+        }
+
+        return vectors;
+    }
+
+    @Override
+    public String toString() {
+
+        String s = "Number of articles by country\n";
+
+        for (Countries c: Countries.values()
+             ) {
+
+            Integer n = articles.stream().filter(x -> x.getFeaturesVector().getCountry() == c).toList().size();
+
+            s += c.name() + ": " + n.toString() + "\n";
+        }
+
+        return s;
     }
 }

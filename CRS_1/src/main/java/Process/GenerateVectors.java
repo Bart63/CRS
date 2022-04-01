@@ -14,7 +14,7 @@ public class GenerateVectors {
 
     Map<String, Integer> monthsToNumbers;
 
-    public GenerateVectors(ArticlesRepo articlesRepo, KeywordsRepo keywordsRepo) {
+    public GenerateVectors(ArticlesRepo articlesRepo, KeywordsRepo keywordsRepo, boolean[] enableFeatures) {
 
         monthsToNumbers = new HashMap<>();
         monthsToNumbers.put("JAN", 1);
@@ -33,10 +33,10 @@ public class GenerateVectors {
         this.articlesRepo = articlesRepo;
         this.keywordsRepo = keywordsRepo;
 
-        generate();
+        generate(enableFeatures);
     }
 
-    private void generate() {
+    private void generate(boolean[] enableFeatures) {
 
         for (var g:keywordsRepo.getKeywordsGroups()
              ) {
@@ -49,6 +49,12 @@ public class GenerateVectors {
                     switch (g.getKeywordsType()){
 
                         case day -> {
+
+                            if (!enableFeatures[0]){
+                                a.getFeaturesVector().getFeature(FeatureType.day).setValue(0);
+                                continue;
+                            }
+
 
                             if (!a.getDate().isEmpty()) {
                                 String[] dateParts = a.getDate().split("-");
@@ -64,6 +70,11 @@ public class GenerateVectors {
 
                         case mth -> {
 
+                            if (!enableFeatures[1]){
+                                a.getFeaturesVector().getFeature(FeatureType.mth).setValue(0);
+                                continue;
+                            }
+
                             if (!a.getDate().isEmpty()) {
                                 String[] dateParts = a.getDate().split("-");
 
@@ -77,6 +88,11 @@ public class GenerateVectors {
                             }
                         }
                         case cit -> {
+
+                            if (!enableFeatures[2]){
+                                a.getFeaturesVector().getFeature(FeatureType.cit).setValue("");
+                                continue;
+                            }
 
                             List<String> c = new ArrayList<>();
                             c.addAll(a.getTitle());
@@ -98,6 +114,11 @@ public class GenerateVectors {
                         }
                         case top -> {
 
+                            if (!enableFeatures[3]){
+                                a.getFeaturesVector().getFeature(FeatureType.top).setValue("");
+                                continue;
+                            }
+
                             List<String> c = new ArrayList<>();
                             c.addAll(a.getTitle());
                             c.addAll((a.getBody()));
@@ -116,6 +137,11 @@ public class GenerateVectors {
                             }
                         }
                         case exc -> {
+
+                            if (!enableFeatures[4]){
+                                a.getFeaturesVector().getFeature(FeatureType.exc).setValue("");
+                                continue;
+                            }
 
                             List<String> c = new ArrayList<>();
                             c.addAll(a.getTitle());
@@ -136,6 +162,11 @@ public class GenerateVectors {
                         }
                         case per -> {
 
+                            if (!enableFeatures[5]){
+                                a.getFeaturesVector().getFeature(FeatureType.per).setValue("");
+                                continue;
+                            }
+
                             List<String> c = new ArrayList<>();
                             c.addAll(a.getTitle());
                             c.addAll((a.getBody()));
@@ -154,6 +185,11 @@ public class GenerateVectors {
                             }
                         }
                         case cur -> {
+
+                            if (!enableFeatures[6]){
+                                a.getFeaturesVector().getFeature(FeatureType.cur).setValue("");
+                                continue;
+                            }
 
                             List<String> c = new ArrayList<>();
                             c.addAll(a.getTitle());
@@ -181,6 +217,11 @@ public class GenerateVectors {
                         }
                         case com -> {
 
+                            if (!enableFeatures[7]){
+                                a.getFeaturesVector().getFeature(FeatureType.com).setValue("");
+                                continue;
+                            }
+
                             List<String> c = new ArrayList<>();
                             c.addAll(a.getTitle());
                             c.addAll((a.getBody()));
@@ -200,6 +241,11 @@ public class GenerateVectors {
                         }
                         case con -> {
 
+                            if (!enableFeatures[8]){
+                                a.getFeaturesVector().getFeature(FeatureType.con).setValue("");
+                                continue;
+                            }
+
                             List<String> c = new ArrayList<>();
                             c.addAll(a.getTitle());
                             c.addAll((a.getBody()));
@@ -217,6 +263,11 @@ public class GenerateVectors {
                             }
                         }
                         case ene -> {
+
+                            if (!enableFeatures[9]){
+                                a.getFeaturesVector().getFeature(FeatureType.ene).setValue("");
+                                continue;
+                            }
 
                             List<String> c = new ArrayList<>();
                             c.addAll(a.getTitle());
@@ -237,6 +288,11 @@ public class GenerateVectors {
                         }
                         case imp -> {
 
+                            if (!enableFeatures[10]){
+                                a.getFeaturesVector().getFeature(FeatureType.imp).setValue(0);
+                                continue;
+                            }
+
                             List<String> c = new ArrayList<>();
                             c.addAll(a.getTitle());
                             c.addAll((a.getBody()));
@@ -254,6 +310,11 @@ public class GenerateVectors {
                             a.getFeaturesVector().getFeature(FeatureType.imp).setValue(n);
                         }
                         case met -> {
+
+                            if (!enableFeatures[11]){
+                                a.getFeaturesVector().getFeature(FeatureType.met).setValue(0);
+                                continue;
+                            }
 
                             List<String> c = new ArrayList<>();
                             c.addAll(a.getTitle());
