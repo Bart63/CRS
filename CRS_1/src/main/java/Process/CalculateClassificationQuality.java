@@ -6,6 +6,8 @@ import Model.FeaturesVector;
 import Repos.ArticlesRepo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -159,19 +161,22 @@ public class CalculateClassificationQuality {
     @Override
     public String toString() {
 
+        DecimalFormat df = new DecimalFormat("#.####");
+        df.setRoundingMode(RoundingMode.CEILING);
+
         String s = "";
         for(int i = 0; i<Countries.values().length; i++){
 
             s += "|| " + Countries.values()[i].name() + " ||\n";
-            s += "Precision: " + precision[i] + "\n";
-            s += "Recall: " + recall[i] + "\n";
+            s += "Precision: " + df.format(precision[i]) + "\n";
+            s += "Recall: " + df.format(recall[i]) + "\n";
             s += "-----------------------------------------" + "\n";
         }
 
-        s += "Avg precision: " + precision[precision.length - 1] + "\n";
-        s += "Avg recall: " + recall[recall.length - 1] + "\n";
-        s += "Accuracy: " + accuracy + "\n";
-        s += "F1 : " + F1 + "\n";
+        s += "Avg precision: " + df.format(precision[precision.length - 1]) + "\n";
+        s += "Avg recall: " + df.format(recall[recall.length - 1]) + "\n";
+        s += "Accuracy: " + df.format(accuracy) + "\n";
+        s += "F1 : " + df.format(F1) + "\n";
 
 
         return s;

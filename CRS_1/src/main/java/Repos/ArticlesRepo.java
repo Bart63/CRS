@@ -59,7 +59,7 @@ public class ArticlesRepo {
     @Override
     public String toString() {
 
-        String s = "Number of articles by country\n";
+        String s = "Number of articles by country:\n";
 
         for (Countries c: Countries.values()
              ) {
@@ -68,6 +68,8 @@ public class ArticlesRepo {
 
             s += c.name() + ": " + n.toString() + "\n";
         }
+
+        s += "Total: " + articles.stream().count() + "\n";
 
         return s;
     }

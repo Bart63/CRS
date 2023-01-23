@@ -25,13 +25,13 @@ public class Main {
         Arrays.fill(f, true);
 
 
-        System.out.println("Parameters (k--p--m--features)");
+        System.out.println("Parameters (k-p-m-features)\nk-number of neighbours, p-percentage of training set, m-metric");
         Scanner sc = new Scanner(System.in);
         String buf = sc.nextLine();
 
         if (!buf.isEmpty()){
 
-            List<String> strings = Arrays.stream(buf.split("--")).toList();
+            List<String> strings = Arrays.stream(buf.split("-")).toList();
 
             k = Integer.parseInt(strings.get(0));
             p = Double.parseDouble(strings.get(1));
@@ -64,6 +64,7 @@ public class Main {
 
         CalculateClassificationQuality quality = new CalculateClassificationQuality(testingArticlesRepo);
 
+        /*
         for(int i = 0; i< testingArticlesRepo.getArticles().size(); i++)
         {
 
@@ -71,9 +72,11 @@ public class Main {
             System.out.println("\n");
 
         }
+         */
 
         System.out.print(quality);
 
-        System.out.print(testingArticlesRepo);
+        System.out.print("Training set: " + learningArticlesRepo);
+        System.out.print("Testing set: " + testingArticlesRepo);
     }
 }
